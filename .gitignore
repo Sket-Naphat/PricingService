@@ -1,0 +1,19 @@
+# .gitignore for PricingService .NET Core Web API
+bin/
+obj/
+*.user
+*.suo
+*.vs
+.vscode/
+.env
+appsettings.*.json
+Data/jobs.json
+Data/rules.json
+# Ignore test results
+TestResults/
+# Ignore logs
+*.log
+# Ignore Docker artifacts
+docker-compose.override.yml
+# Ignore local settings
+local.settings.json
