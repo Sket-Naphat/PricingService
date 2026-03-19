@@ -7,8 +7,8 @@ obj/
 .vscode/
 .env
 appsettings.*.json
-Data/jobs.json
-Data/rules.json
+# Data/jobs.json
+# Data/rules.json
 # Ignore test results
 TestResults/
 # Ignore logs

@@ -1,0 +1,100 @@
+[
+  {
+    "Id": 1,
+    "Type": 0,
+    "Priority": 0,
+    "EffectiveFrom": "0001-01-01T00:00:00Z",
+    "EffectiveTo": "0001-01-01T00:00:00Z",
+    "IsActive": false,
+    "DiscountPercent": null,
+    "AreaList": null,
+    "SurchargeAmount": null,
+    "WeightTiers": null
+  },
+  {
+    "Id": 2,
+    "Type": 0,
+    "Priority": 0,
+    "EffectiveFrom": "0001-01-01T00:00:00Z",
+    "EffectiveTo": "0001-01-01T00:00:00Z",
+    "IsActive": false,
+    "DiscountPercent": null,
+    "AreaList": null,
+    "SurchargeAmount": null,
+    "WeightTiers": null
+  },
+  {
+    "Id": 3,
+    "Type": 0,
+    "Priority": 0,
+    "EffectiveFrom": "0001-01-01T00:00:00Z",
+    "EffectiveTo": "0001-01-01T00:00:00Z",
+    "IsActive": false,
+    "DiscountPercent": null,
+    "AreaList": null,
+    "SurchargeAmount": null,
+    "WeightTiers": null
+  },
+  {
+    "Id": 4,
+    "Type": 1,
+    "Priority": 1,
+    "EffectiveFrom": "2024-03-20T00:00:00Z",
+    "EffectiveTo": "2024-04-20T23:59:59Z",
+    "IsActive": true,
+    "DiscountPercent": 10,
+    "AreaList": null,
+    "SurchargeAmount": null,
+    "WeightTiers": null
+  },
+  {
+    "Id": 5,
+    "Type": 0,
+    "Priority": 1,
+    "EffectiveFrom": "2024-03-20T00:00:00Z",
+    "EffectiveTo": "2024-04-20T23:59:59Z",
+    "IsActive": true,
+    "DiscountPercent": 10,
+    "AreaList": null,
+    "SurchargeAmount": null,
+    "WeightTiers": null
+  },
+  {
+    "Id": 6,
+    "Type": 1,
+    "Priority": 2,
+    "EffectiveFrom": "2024-03-20T00:00:00Z",
+    "EffectiveTo": "2024-04-20T23:59:59Z",
+    "IsActive": true,
+    "DiscountPercent": null,
+    "AreaList": [
+      "AreaA",
+      "AreaB"
+    ],
+    "SurchargeAmount": 50,
+    "WeightTiers": null
+  },
+  {
+    "Id": 7,
+    "Type": 2,
+    "Priority": 3,
+    "EffectiveFrom": "2024-03-20T00:00:00Z",
+    "EffectiveTo": "2024-04-20T23:59:59Z",
+    "IsActive": true,
+    "DiscountPercent": null,
+    "AreaList": null,
+    "SurchargeAmount": null,
+    "WeightTiers": [
+      {
+        "MinWeight": 0,
+        "MaxWeight": 5,
+        "Price": 100
+      },
+      {
+        "MinWeight": 5.01,
+        "MaxWeight": 10,
+        "Price": 180
+      }
+    ]
+  }
+]

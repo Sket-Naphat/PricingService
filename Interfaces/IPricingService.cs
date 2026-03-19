@@ -7,5 +7,10 @@ namespace PricingService.Services.Interfaces
         QuoteResult CalculatePrice(QuoteRequest request);
         Job SubmitBulkQuotes(BulkQuoteRequest request);
         Job? GetJobById(int jobId);
+        Rule CreateRule(Rule rule);
+        void SaveAllRules(List<Rule> rules);
+        List<Rule> GetAllRules();
+        Rule? UpdateRule(int id, Rule updatedRule);
+        bool DeleteRule(int id);
     }
 }

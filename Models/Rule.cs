@@ -5,8 +5,11 @@ namespace PricingService.Models
 {
     public enum RuleType
     {
+        // โปรโมชั่นลดราคาในช่วงเวลาที่กำหนด
         TimeWindowPromotion,
+        // ค่าบริการเพิ่มเติมสำหรับพื้นที่ห่างไกล
         RemoteAreaSurcharge,
+        // กำหนดราคาตามช่วงน้ำหนัก
         WeightTier
     }
 

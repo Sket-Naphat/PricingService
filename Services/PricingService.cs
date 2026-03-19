@@ -10,8 +10,12 @@ namespace PricingService.Services
 {
     public class PricingService : IPricingService
     {
+        // ตัวแปรกลางสำหรับ path ของไฟล์
+        private const string RulesFilePath = "Data/rules.json";
+        private const string JobsFilePath = "Data/jobs.json";
+
         // ฟังก์ชัน generic สำหรับอ่านข้อมูลจากไฟล์ JSON
-        private List<T> GetAllFromFile<T>(string filePath)
+        private List<T> GetDataFromDB<T>(string filePath)
         {
             if (!File.Exists(filePath))
                 return new List<T>();
@@ -20,22 +24,15 @@ namespace PricingService.Services
             return items ?? new List<T>();
         }
 
-        // อ่าน jobs ทั้งหมดจากไฟล์ JSON
-        private List<Job> GetAllJobs()
-        {
-            return GetAllFromFile<Job>("Data/jobs.json");
-        }
-
         // คำนวณราคาตาม request ที่รับเข้ามา
         public QuoteResult CalculatePrice(QuoteRequest request)
         {
             try
             {
                 // 1. เลือก rules ที่ตรงกับช่วงเวลาและเปิดใช้งาน
-                var GetAllRules = GetAllFromFile<Rule>("Data/rules.json");
-                var rules = GetAllRules
-                    .Where(r => r.IsActive 
-                        && r.EffectiveFrom <= request.ServiceDate 
+                var rules = GetDataFromDB<Rule>(RulesFilePath)
+                    .Where(r => r.IsActive
+                        && r.EffectiveFrom <= request.ServiceDate
                         && r.EffectiveTo >= request.ServiceDate)
                     .OrderBy(r => r.Priority)
                     .ToList();
@@ -97,7 +94,7 @@ namespace PricingService.Services
         {
             // โหลด jobs เดิมจากไฟล์
 
-            var jobs =  GetAllFromFile<Job>("Data/jobs.json");
+            var jobs = GetDataFromDB<Job>(JobsFilePath);
             // หา PK ล่าสุด แล้ว +1
             int nextId = jobs.Any() ? jobs.Max(j => j.JobId) + 1 : 1;
             // คำนวณราคาทุก request
@@ -141,8 +138,74 @@ namespace PricingService.Services
 
         public Job? GetJobById(int jobId)
         {
-            var jobs = GetAllFromFile<Job>("Data/jobs.json");
+            var jobs = GetDataFromDB<Job>(JobsFilePath);
             return jobs.FirstOrDefault(j => j.JobId == jobId);
+        }
+
+        public Rule CreateRule(Rule rule)
+        {
+            var rules = GetDataFromDB<Rule>(RulesFilePath);
+            rule.Id = rules.Count > 0 ? rules.Max(r => r.Id) + 1 : 1;
+
+            // ตรวจสอบและแปลงค่า EffectiveFrom/EffectiveTo ให้เป็น UTC หากรับเป็น string ที่ parse ได้
+            if (rule.EffectiveFrom == default && !string.IsNullOrEmpty(rule.EffectiveFrom.ToString()))
+            {
+                if (DateTime.TryParse(rule.EffectiveFrom.ToString(), out var efFrom))
+                    rule.EffectiveFrom = DateTime.SpecifyKind(efFrom, DateTimeKind.Utc);
+            }
+            if (rule.EffectiveTo == default && !string.IsNullOrEmpty(rule.EffectiveTo.ToString()))
+            {
+                if (DateTime.TryParse(rule.EffectiveTo.ToString(), out var efTo))
+                    rule.EffectiveTo = DateTime.SpecifyKind(efTo, DateTimeKind.Utc);
+            }
+
+            rules.Add(rule);
+            var updatedJson = JsonSerializer.Serialize(rules, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(RulesFilePath, updatedJson);
+            return rule;
+        }
+
+        public void SaveAllRules(List<Rule> rules)
+        {
+            // Save all rules to rules.json
+            var updatedJson = JsonSerializer.Serialize(rules, new JsonSerializerOptions { WriteIndented = true });
+            File.WriteAllText(RulesFilePath, updatedJson);
+        }
+
+        public Rule? UpdateRule(int id, Rule updatedRule)
+        {
+            // Update rule by id and save to rules.json
+            var rules = GetDataFromDB<Rule>(RulesFilePath);
+            var rule = rules.Find(r => r.Id == id);
+            if (rule == null)
+                return null;
+            rule.Type = updatedRule.Type;
+            rule.Priority = updatedRule.Priority;
+            rule.EffectiveFrom = updatedRule.EffectiveFrom;
+            rule.EffectiveTo = updatedRule.EffectiveTo;
+            rule.IsActive = updatedRule.IsActive;
+            rule.DiscountPercent = updatedRule.DiscountPercent;
+            rule.AreaList = updatedRule.AreaList;
+            rule.SurchargeAmount = updatedRule.SurchargeAmount;
+            rule.WeightTiers = updatedRule.WeightTiers;
+            SaveAllRules(rules);
+            return rule;
+        }
+
+        public bool DeleteRule(int id)
+        {
+            var rules = GetDataFromDB<Rule>(RulesFilePath);
+            var rule = rules.Find(r => r.Id == id);
+            if (rule == null)
+                return false;
+            rules.Remove(rule);
+            SaveAllRules(rules);
+            return true;
+        }
+                // ดึง rule ทั้งหมดจาก rules.json
+        public List<Rule> GetAllRules()
+        {
+            return GetDataFromDB<Rule>(RulesFilePath);
         }
     }
 }

@@ -1,0 +1,44 @@
+[
+  {
+    "JobId": 1,
+    "Status": "Completed",
+    "Results": [
+      {
+        "Price": 212,
+        "AppliedRules": [
+          "WeightTier: 5.01-10kg = 180",
+          "TimeWindowPromotion: -10%",
+          "RemoteAreaSurcharge: AreaA \u002B50"
+        ],
+        "Messages": [
+          "Base price: 180",
+          "Promotion applied: -18",
+          "Surcharge for remote area applied: 50"
+        ]
+      },
+      {
+        "Price": 140,
+        "AppliedRules": [
+          "WeightTier: 0-5kg = 100",
+          "TimeWindowPromotion: -10%",
+          "RemoteAreaSurcharge: AreaB \u002B50"
+        ],
+        "Messages": [
+          "Base price: 100",
+          "Promotion applied: -10",
+          "Surcharge for remote area applied: 50"
+        ]
+      },
+      {
+        "Price": 0,
+        "AppliedRules": [
+          "TimeWindowPromotion: -10%"
+        ],
+        "Messages": [
+          "Promotion applied: -0"
+        ]
+      }
+    ],
+    "CreatedAt": "2026-03-19T15:46:59.226529Z"
+  }
+]
