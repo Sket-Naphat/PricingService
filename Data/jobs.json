@@ -4,41 +4,61 @@
     "Status": "Completed",
     "Results": [
       {
+        "Price": 90,
+        "AppliedRules": [
+          "WeightTier: 0-10kg = 100",
+          "TimeWindowPromotion: -10%"
+        ],
+        "Messages": [
+          "Base price: 100",
+          "Promotion applied: -10"
+        ]
+      },
+      {
         "Price": 212,
         "AppliedRules": [
-          "WeightTier: 5.01-10kg = 180",
+          "WeightTier: 10.01-20kg = 180",
           "TimeWindowPromotion: -10%",
-          "RemoteAreaSurcharge: AreaA \u002B50"
+          "RemoteAreaSurcharge: ChiangMai \u002B50"
         ],
         "Messages": [
           "Base price: 180",
           "Promotion applied: -18",
           "Surcharge for remote area applied: 50"
         ]
-      },
+      }
+    ],
+    "CreatedAt": "2026-03-20T02:15:49.0810621Z"
+  },
+  {
+    "JobId": 2,
+    "Status": "Completed",
+    "Results": [
       {
-        "Price": 140,
+        "Price": 90,
         "AppliedRules": [
-          "WeightTier: 0-5kg = 100",
-          "TimeWindowPromotion: -10%",
-          "RemoteAreaSurcharge: AreaB \u002B50"
-        ],
-        "Messages": [
-          "Base price: 100",
-          "Promotion applied: -10",
-          "Surcharge for remote area applied: 50"
-        ]
-      },
-      {
-        "Price": 0,
-        "AppliedRules": [
+          "WeightTier: 0-10kg = 100",
           "TimeWindowPromotion: -10%"
         ],
         "Messages": [
-          "Promotion applied: -0"
+          "Base price: 100",
+          "Promotion applied: -10"
+        ]
+      },
+      {
+        "Price": 212,
+        "AppliedRules": [
+          "WeightTier: 10.01-20kg = 180",
+          "TimeWindowPromotion: -10%",
+          "RemoteAreaSurcharge: ChiangMai \u002B50"
+        ],
+        "Messages": [
+          "Base price: 180",
+          "Promotion applied: -18",
+          "Surcharge for remote area applied: 50"
         ]
       }
     ],
-    "CreatedAt": "2026-03-19T15:46:59.226529Z"
+    "CreatedAt": "2026-03-20T04:17:26.2643657Z"
   }
 ]

@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+  pricingservice:
+    build: .
+    ports:
+      - "5228:5228"
+    volumes:
+      - ./Data:/app/Data
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production

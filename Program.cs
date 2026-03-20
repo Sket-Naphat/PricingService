@@ -16,12 +16,9 @@ builder.Services.AddScoped<IPricingService, PricingService.Services.PricingServi
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+// เปิด Swagger ทุก environment
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseHttpsRedirection();
 

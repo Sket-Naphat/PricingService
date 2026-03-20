@@ -53,7 +53,7 @@ namespace PricingService.Controllers
                 var deleted = _pricingService.DeleteRule(id);
                 if (!deleted)
                     return NotFound(new { error = "Rule not found" });
-                return NoContent();
+                return Ok(new { success = true, message = $"Rule {id} deleted." });
             }
             catch (System.Exception ex)
             {
